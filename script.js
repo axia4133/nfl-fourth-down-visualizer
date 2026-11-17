@@ -75,17 +75,17 @@
     svg.append('text').attr('x',x(100)+18).attr('y',161).attr('fill','#afdbc1').attr('font-family','Barlow Condensed').attr('font-weight',800).attr('font-size',19).attr('letter-spacing',1).attr('text-anchor','middle').attr('transform',`rotate(90 ${x(100)+18} 161)`).text('OPP');
     const scrimmage = x(state.position);
     const first = x(Math.min(100, state.position+state.distance));
-    svg.append('rect').attr('x',scrimmage).attr('y',top).attr('width',Math.max(0,first-scrimmage)).attr('height',height).attr('fill','#f2ed94').attr('opacity',.12);
-    svg.append('line').attr('x1',first).attr('x2',first).attr('y1',top).attr('y2',bottom).attr('stroke','#f8e77d').attr('stroke-width',4).attr('stroke-dasharray','8,4');
+    svg.append('rect').attr('x',scrimmage).attr('y',top).attr('width',Math.max(0,first-scrimmage)).attr('height',height).attr('fill','#bfdbfe').attr('opacity',.16);
+    svg.append('line').attr('x1',first).attr('x2',first).attr('y1',top).attr('y2',bottom).attr('stroke','#2563eb').attr('stroke-width',4).attr('stroke-dasharray','8,4');
     svg.append('line').attr('x1',scrimmage).attr('x2',scrimmage).attr('y1',top).attr('y2',bottom).attr('stroke','#c3eeff').attr('stroke-width',3);
     svg.append('ellipse').attr('cx',scrimmage).attr('cy',156).attr('rx',17).attr('ry',10).attr('fill','#5c3428').attr('stroke','#f3e9d3').attr('stroke-width',2);
     svg.append('line').attr('x1',scrimmage-8).attr('x2',scrimmage+8).attr('y1',156).attr('y2',156).attr('stroke','#fff').attr('stroke-width',2);
     [-4,0,4].forEach(offset => svg.append('line').attr('x1',scrimmage+offset).attr('x2',scrimmage+offset).attr('y1',153).attr('y2',159).attr('stroke','#fff').attr('stroke-width',1.2));
     const tagX = Math.max(95, Math.min(840, scrimmage));
-    svg.append('rect').attr('x',tagX-55).attr('y',13).attr('width',110).attr('height',31).attr('rx',3).attr('fill','#d4fb75');
-    svg.append('text').attr('x',tagX).attr('y',34).attr('text-anchor','middle').attr('font-family','Barlow Condensed').attr('font-size',22).attr('font-weight',900).attr('fill','#10261c').text(`4TH & ${state.distance}`);
-    svg.append('text').attr('x',left).attr('y',292).attr('fill','#bdd1c1').attr('font-family','DM Sans').attr('font-size',12).attr('font-weight',700).text('YOUR GOAL');
-    svg.append('text').attr('x',x(100)).attr('y',292).attr('fill','#bdd1c1').attr('font-family','DM Sans').attr('font-size',12).attr('font-weight',700).attr('text-anchor','end').text('OPPONENT GOAL');
+    svg.append('rect').attr('x',tagX-55).attr('y',13).attr('width',110).attr('height',31).attr('rx',3).attr('fill','#2563eb');
+    svg.append('text').attr('x',tagX).attr('y',34).attr('text-anchor','middle').attr('font-family','Arial, sans-serif').attr('font-size',18).attr('font-weight',700).attr('fill','#fff').text(`4TH & ${state.distance}`);
+    svg.append('text').attr('x',left).attr('y',292).attr('fill','#444').attr('font-family','Arial, sans-serif').attr('font-size',12).attr('font-weight',700).text('YOUR GOAL');
+    svg.append('text').attr('x',x(100)).attr('y',292).attr('fill','#444').attr('font-family','Arial, sans-serif').attr('font-size',12).attr('font-weight',700).attr('text-anchor','end').text('OPPONENT GOAL');
     svg.append('rect').attr('x',left).attr('y',top).attr('width',x(100)-left).attr('height',height).attr('fill','transparent').style('cursor','crosshair').attr('role','button').attr('aria-label','Select field position')
       .on('click', function (event) {
         const position = d3.pointer(event,svg.node())[0];
