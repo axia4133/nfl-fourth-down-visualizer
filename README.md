@@ -102,17 +102,6 @@ Each heatmap cell bins field progress into 10-yard intervals and yards to go int
 
 Coaches do **not** face random situations. These data are observational, not evidence of a causally optimal play. Decision differences could reflect score, clock, weather, roster, opponent, and team style; most are not yet part of the filters. The raw 2026 data and a subset of its rows have been checked, but any specific published takeaway should still be verified against the source records.
 
-## How to make the final submission excellent
-
-The November 18 **initial prototype** rubric is a completeness rubric totaling three points. It does **not** have an “Excellent” tier. The December 9 **final deliverables** rubric does. After the prototype, prioritize:
-
-1. **Real finding:** identify a surprising relationship in the actual dataset and craft an opening hook around it.
-2. **Editorial narrative:** frame the story as "You might expect X, **but** real fourth-down choices show Y, **therefore** context matters." Use real counts and annotations — never invent the finding beforehand.
-3. **Thoughtful encodings:** explain the meaning of color, sample sizes, and field-direction labels; distinguish observed attempt rate from conversion success.
-4. **More context if supported by data:** score differential, game clock, team, and conversion outcomes. Validate all columns first.
-5. **Accessibility + polish:** keyboard-test the heatmap, test on laptop and mobile, and have classmates try the challenge without instructions.
-6. **Demo video (≤2 minutes):** hook, motivation, interaction demonstration, and a clear evidence-based takeaway. Final webpage must link or embed the video.
-
 ## Acknowledgments
 
 - Data: [Kaggle NFL Game Scores Dataset](https://www.kaggle.com/datasets/keonim/nfl-game-scores-dataset-2017-2023/data?select=2026_plays.csv) (as provided in the project proposal).
