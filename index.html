@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Fourth Down: You're the Coach. Explore real NFL fourth-down decisions with interactive D3 visualizations.">
+  <meta name="theme-color" content="#08121a">
+  <title>Fourth Down — You're the Coach | DSC 106</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700;800;900&family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+  <script src="https://cdn.jsdelivr.net/npm/d3@7/dist/d3.min.js" defer></script>
+  <script src="./data-utils.js" defer></script>
+  <script src="./script.js" defer></script>
+</head>
+<body>
+  <a href="#main" class="skip-link">Skip to main content</a>
+  <header class="site-header">
+    <a class="brand" href="#top" aria-label="Fourth Down home"><span class="brand-icon">4<span>TH</span></span><span class="brand-text">THE<br>DECISION</span></a>
+    <nav class="top-nav" aria-label="Main navigation">
+      <a href="#coach">THE CHALLENGE</a>
+      <a href="#evidence">THE EVIDENCE</a>
+      <a href="#method">ABOUT THE DATA</a>
+    </nav>
+    <div class="data-indicator" id="data-indicator"><span class="status-dot"></span><span id="data-status-short">DATA NOT LOADED</span></div>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-grid"></div>
+      <div class="hero-inner">
+        <p class="eyebrow"><span class="mini-dash"></span> AN INTERACTIVE NFL DATA STORY <span class="separator">/</span> 2026 SEASON</p>
+        <h1>FOURTH<br><em>DOWN.</em></h1>
+        <div class="hero-bottom">
+          <div>
+            <p class="hero-lead">THE GAME PAUSES.<br><strong>YOU DECIDE.</strong></p>
+            <p class="hero-copy">One play. Three choices. What would you call — and what do NFL teams actually do? Put your instincts to the test, then explore the numbers behind the decision.</p>
+          </div>
+          <a class="start-link" href="#coach"><span>TAKE THE SIDELINE</span><span class="circle-arrow" aria-hidden="true">↘</span></a>
+        </div>
+      </div>
+      <div class="hero-index"><span>01 / 03</span><span>THE PRESSURE IS ON</span></div>
+    </section>
+
+    <div class="section-rule"><span>01</span><span>THE CHALLENGE</span><span>MAKE YOUR CALL ↓</span></div>
+    <section class="challenge-section" id="coach">
+      <div class="section-intro">
+        <div class="section-title-group"><p class="kicker">THE FOURTH DOWN EXPERIMENT</p><h2>YOU'RE THE <span>COACH.</span></h2></div>
+        <p>It's fourth down. The offense stays on the field, the special teams unit waits, and the decision is yours. Set the situation, then make your call.</p>
+      </div>
+      <div class="challenge-grid">
+        <article class="board-panel">
+          <div class="panel-topline"><span><span class="live-icon"></span> FIELD VIEW</span><span id="field-heading">4TH &amp; 2 • Q4</span></div>
+          <div class="field-frame"><svg id="field-svg" viewBox="0 0 940 320" role="group" tabindex="0" aria-label="Interactive football field. Click a position or use the left and right arrow keys to move the ball."></svg></div>
+          <div class="field-bottom"><div><span class="field-meta-label">BALL ON</span><strong id="field-text">OPP 44</strong></div><div><span class="field-meta-label">FIRST DOWN</span><strong id="first-down-text">OPP 42</strong></div><p>CLICK THE FIELD OR USE ARROW KEYS</p></div>
+          <div class="controls">
+            <div class="control-title"><span>CONFIGURE THE PLAY</span><button class="reset-link" id="reset-btn" type="button">↺ RESET</button></div>
+            <div class="slider-group"><div class="control-row"><label for="position-range">FIELD POSITION</label><output id="position-output" for="position-range">56 yards from own goal</output></div><input id="position-range" class="range" type="range" min="5" max="95" value="56" step="1"><div class="range-labels"><span>OWN GOAL</span><span>MIDFIELD</span><span>OPP GOAL</span></div></div>
+            <div class="slider-group"><div class="control-row"><label for="distance-range">YARDS TO GO</label><output id="distance-output" for="distance-range">2 yards</output></div><input id="distance-range" class="range" type="range" min="1" max="15" value="2" step="1"><div class="range-labels"><span>1 YARD</span><span>SHORT OF A FIRST DOWN</span><span>15 YARDS</span></div></div>
+            <div class="quarter-group"><span class="control-row"><span class="control-label">GAME QUARTER</span><span class="control-helper">REGULATION</span></span><div class="quarter-buttons" role="group" aria-label="Select quarter"><button type="button" data-quarter="1">Q1</button><button type="button" data-quarter="2">Q2</button><button type="button" data-quarter="3">Q3</button><button type="button" data-quarter="4" class="selected" aria-pressed="true">Q4</button></div></div>
+          </div>
+        </article>
+        <article class="call-panel">
+          <div class="panel-topline"><span>THE DECISION</span><span class="panel-counter">NO. 001</span></div>
+          <div class="call-content"><p class="call-eyebrow">YOUR PLAYBOOK. YOUR CALL.</p><h3>WHAT WOULD<br><em>YOU DO?</em></h3><p class="call-body">Consider the field position, distance, and quarter. There isn't a guaranteed answer — but there is a real record of what NFL teams chose.</p>
+            <div class="option-list" role="group" aria-label="Choose your fourth-down decision">
+              <button type="button" class="choice-btn" data-choice="go"><span class="choice-number">01</span><span class="choice-copy"><strong>GO FOR IT</strong><small>Keep the offense on the field</small></span><span class="choice-arrow">↗</span></button>
+              <button type="button" class="choice-btn" data-choice="punt"><span class="choice-number">02</span><span class="choice-copy"><strong>PUNT</strong><small>Trade possession for field position</small></span><span class="choice-arrow">↗</span></button>
+              <button type="button" class="choice-btn" data-choice="fg"><span class="choice-number">03</span><span class="choice-copy"><strong>FIELD GOAL</strong><small>Attempt three points</small></span><span class="choice-arrow">↗</span></button>
+            </div>
+            <p class="choice-hint" id="choice-hint" aria-live="polite">PICK A PLAY TO REVEAL THE DATA ↓</p>
+          </div>
+          <div class="call-footer"><span>THINK LIKE A COACH.</span><span>QUESTION YOUR INSTINCTS.</span></div>
+        </article>
+      </div>
+    </section>
+
+    <div class="section-rule" id="evidence"><span>02</span><span>THE EVIDENCE</span><span>COMPARE THE CALLS ↓</span></div>
+    <section class="evidence-section">
+      <div class="section-intro"><div class="section-title-group"><p class="kicker">WHAT THE LEAGUE ACTUALLY DID</p><h2>INSTINCT <span>VS. DATA.</span></h2></div><p>How do actual fourth-down decisions compare to yours? The charts use recorded plays — not a prediction model or an invented “best” strategy.</p></div>
+      <div class="data-notice" id="data-notice" role="status" aria-live="polite"><div><p class="notice-title" id="notice-title">DATASET READY TO CONNECT</p><p id="notice-text">Place 2026_plays.csv next to index.html or load it from your computer to reveal real NFL percentages.</p></div><div class="upload-actions"><label class="upload-button" for="csv-file">↑ LOAD CSV</label><input type="file" id="csv-file" accept=".csv,text/csv" hidden><a class="source-link" href="https://www.kaggle.com/datasets/keonim/nfl-game-scores-dataset-2017-2023/data?select=2026_plays.csv" target="_blank" rel="noopener noreferrer">DATA SOURCE ↗</a></div></div>
+      <div class="evidence-grid">
+        <div class="chart-panel"><div class="chart-heading"><div><p class="chart-kicker">DECISION DISTRIBUTION</p><h3>What teams chose</h3></div><span id="sample-chip" class="sample-chip">AWAITING DATA</span></div><div class="chart-wrap" id="decision-chart" aria-live="polite"><div class="empty-chart"><div class="empty-glyph">↗</div><h4>YOUR CALL STARTS THE STORY</h4><p>Choose a play above, then load the CSV to compare your decision with the league.</p></div></div><p class="chart-caption" id="chart-caption">Results use real fourth-down plays matching your selected situation. No data is simulated.</p></div>
+        <div class="insight-panel"><div class="chart-heading"><div><p class="chart-kicker">THE BIG PICTURE</p><h3>Read the situation</h3></div><span class="insight-star">✳</span></div><div class="insight-value" id="insight-value">—</div><p class="insight-headline" id="insight-headline">First, make your fourth-down call.</p><p class="insight-body" id="insight-body">We'll calculate an insight from recorded NFL plays as soon as you connect your dataset.</p><div class="insight-foot"><span>IMPORTANT CONTEXT</span><p>What coaches chose is not necessarily what they <em>should</em> have chosen. This project describes observed decisions, not causal impact or optimal strategy.</p></div></div>
+      </div>
+
+      <div class="heatmap-section"><div class="heatmap-header"><div><p class="chart-kicker">THE DECISION LANDSCAPE</p><h3>Where do teams go for it?</h3><p>Each square represents a field zone and distance-to-go range. Brighter yellow-green means a higher observed rate of attempting a conversion. Click a square to investigate that scenario above.</p></div><div class="legend"><span>0%</span><span class="legend-grad"></span><span>100%</span><span class="legend-descriptor">GO-FOR-IT RATE</span></div></div><div id="heatmap" class="heatmap-wrap" aria-label="Interactive heatmap of fourth-down attempt rate"><div class="empty-heatmap">LOAD A CSV TO BUILD THE FOURTH-DOWN HEATMAP FROM REAL PLAYS.</div></div><div class="heatmap-foot"><span id="heatmap-caption">Empty squares indicate no matching recorded plays.</span><span id="heatmap-selection">CLICK A SQUARE TO EXPLORE</span></div></div>
+    </section>
+
+    <div class="section-rule" id="method"><span>03</span><span>BEHIND THE DATA</span><span>HOW IT WORKS ↓</span></div>
+    <section class="method-section"><div class="method-grid"><div><p class="kicker">THE APPROACH</p><h2>EVERY YARD<br><span>CHANGES THE CALL.</span></h2><p class="method-lead">Fourth-down decisions depend on context. We filter the play-by-play records by distance, field location, and quarter, then show how often teams punted, kicked, or attempted to convert.</p><a class="method-link" href="https://www.kaggle.com/datasets/keonim/nfl-game-scores-dataset-2017-2023/data?select=2026_plays.csv" rel="noopener noreferrer" target="_blank">VIEW THE SOURCE DATA ↗</a></div><div class="method-notes"><div><span class="method-num">01 / THE QUESTION</span><h3>Would you make the same call?</h3><p>Choose a fourth-down situation and compare your own decision against observed NFL behavior.</p></div><div><span class="method-num">02 / THE METHOD</span><h3>Similar situations, not identical plays</h3><p>The comparison includes regular-season Weeks 1–9 and matches the selected quarter, field position within 12 yards, and distance to go within 2 yards. If fewer than eight plays match, the search expands to ±20 and ±4 yards, always showing the window and sample size.</p></div><div><span class="method-num">03 / THE LIMITATION</span><h3>Descriptive ≠ optimal</h3><p>These statistics summarize observed choices; they do not estimate win probability, expected points, or the best possible decision. Small samples and missing plays can affect patterns.</p></div></div></div></section>
+
+    <section class="reflection-section"><div class="section-intro"><div class="section-title-group"><p class="kicker">INITIAL PROTOTYPE // DSC 106</p><h2>BUILD NOTES <span>& NEXT STEPS.</span></h2></div><p>Our progress and design challenges for the November 18 prototype milestone.</p></div><div class="reflection-grid"><article><p class="reflection-id">01 / WHAT HAVE WE DONE SO FAR?</p><h3>From proposal to interactive experience</h3><p>We translated our NFL fourth-down proposal into an explorable coaching challenge. We built an interactive football field where visitors can change field position, yards to go, and quarter before choosing a play. We implemented a D3-driven decision chart and field-position heatmap designed to update from real play-by-play records. We tested the parser against the Kaggle 2026 file, excluded preseason and penalty-only rows, and added sample-size notices, labels, and a responsive layout for GitHub Pages.</p></article><article><p class="reflection-id">02 / WHAT WILL BE MOST CHALLENGING?</p><h3>Making comparisons fair and meaningful</h3><p>The hardest part will be deciding which fourth-down situations are comparable without hiding important differences in game context. Our Kaggle CSV stores the down and field position inside text rather than separate columns, so we had to parse those values and check them against team abbreviations. Very specific filters may produce small samples that make percentages unstable or misleading. We plan to show the number of matching plays, disclose when the matching window expands, and test the visualizations against the source data before drawing conclusions. We also want to keep the interactive story engaging without implying that the most common choice is automatically the best choice.</p></article></div></section>
+  </main>
+
+  <footer class="footer"><div class="footer-brand">FOURTH <span>DOWN.</span></div><div><p>AN EXPLORABLE EXPLANATION</p><p>DSC 106 · UC SAN DIEGO · FALL 2026</p></div><div><p>EUGENE BERTRAND</p><p>DAVIS DO · ANDREW XIA</p></div><a href="#top">BACK TO TOP ↑</a></footer>
+  <noscript>This interactive project requires JavaScript enabled.</noscript>
+</body>
+</html>
